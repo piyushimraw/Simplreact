@@ -1,6 +1,7 @@
 import element from './element';
 interface props {
-  id: String,
+  id: string,
+  [key:string]: any,
   children: Array<element>,
 }
 
