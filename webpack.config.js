@@ -5,23 +5,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: Path.resolve(__dirname, './examples/src/main.js')
+    app: Path.resolve(__dirname, './examples/src/index.js')
   },
   output: {
     path: Path.join(__dirname, './examples/build'),
     filename: 'js/[name].js'
   },
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-      name: false
-    }
-  },
   plugins: [
-    // new CleanWebpackPlugin(),
-    // new CopyWebpackPlugin([
-    //   { from: Path.resolve(__dirname, '../public'), to: 'public' }
-    // ]),
     new HtmlWebpackPlugin({
       template: Path.resolve(__dirname, './examples/src/index.html')
     })
@@ -34,9 +24,17 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.mjs$/,
-        include: /node_modules/,
-        type: 'javascript/auto'
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+            "plugins": [
+              ["transform-react-jsx", { "pragma":"createElement" }]
+            ]          
+          }
+        }
       },
       {
         test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
