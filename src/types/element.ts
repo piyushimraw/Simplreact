@@ -1,7 +1,7 @@
 import props from './props';
 
 interface element {
-  type: String,
+  type: string,
   props: props,
 }
 
