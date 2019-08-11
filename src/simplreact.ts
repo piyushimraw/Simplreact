@@ -12,6 +12,11 @@ export default class SimplReact {
             dom.addEventListener(event, props[name]);
         })
 
+        const attributes = Object.keys(props).filter(isAttribute);
+        attributes.forEach((attribute: string) =>{
+            dom.setAttribute(attribute, props[attribute]);
+        })
+
         const childElements = props.children || [];
         childElements.forEach(childElement => this.render(childElement, dom));
         parentDom.appendChild(dom);

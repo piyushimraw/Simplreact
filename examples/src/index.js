@@ -8,6 +8,7 @@ const element = {
       { type: "input", 
         props: { 
           onClick: (e) => console.log(e),
+          value: 'hi',
         } 
       },
     ]
