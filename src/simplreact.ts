@@ -4,7 +4,6 @@ import { isAttribute, isListener } from './utils/DomUtils'
 export default class SimplReact {
   static createElement = createElement
   static render(element: element, parentDom: any) {
-    console.log(element)
     const { type, props } = element
     const dom = document.createElement(type)
 
