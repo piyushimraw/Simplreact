@@ -1,18 +1,9 @@
-import SimplReact from '../../dist/simplreact.es5';
+import SimplReact from '../../dist/simplreact.es5'
 
-const element = {
-  type: "div",
-  props: {
-    id: "container",
-    children: [
-      { type: "input", 
-        props: { 
-          onClick: (e) => console.log(e),
-          value: 'hi',
-        } 
-      },
-    ]
-  }
-};
+const element = (
+  <div>
+    <input value="123" onClick={e => console.log(e)} />
+  </div>
+)
 
-SimplReact.render(element, document.getElementById("root"));
+SimplReact.render(element, document.getElementById('root'))
