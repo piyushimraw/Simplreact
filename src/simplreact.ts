@@ -1,12 +1,13 @@
 import element from './types/element'
-import createElement from './lib/CreateElement'
-import { isAttribute, isListener } from './utils/DomUtils'
+import { createElement, elementTypes } from './lib/CreateElement'
+import { isAttribute, isListener, setAttributes } from './utils/DomUtils'
 export default class SimplReact {
   static createElement = createElement
   static render(element: element, parentDom: any) {
+    console.log(element)
     const { type, props } = element
-    const dom = document.createElement(type)
-
+    const isTextElement = type === elementTypes.TEXT_NODE
+    const dom = isTextElement ? document.createTextNode('') : document.createElement(type)
     // attach listeners
     const listeners = Object.keys(props).filter(isListener)
     listeners.forEach((name: string) => {
@@ -15,9 +16,7 @@ export default class SimplReact {
     })
 
     const attributes = Object.keys(props).filter(isAttribute)
-    attributes.forEach((attribute: string) => {
-      dom.setAttribute(attribute, props[attribute])
-    })
+    attributes.forEach((attribute: string) => setAttributes(dom, attribute, props))
 
     const childElements = props.children || []
     childElements.forEach(childElement => this.render(childElement, dom))
