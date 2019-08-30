@@ -28,8 +28,12 @@ export const instantiate = (element: element): Instance => {
   const attributes = Object.keys(props).filter(isAttribute)
   attributes.forEach((attribute: string) => setAttributes(dom, attribute, props))
 
-  const childInstances = props.children.map(instantiate)
+  const childElements = props.children || []
 
+  const childInstances = childElements.map(instantiate)
+  const childDOM = childInstances.map(instance => instance.dom)
+  childDOM.forEach(childDOM => dom.appendChild(childDOM))
+  console.log(dom)
   const instance: Instance = { dom, element, childInstances }
 
   return instance

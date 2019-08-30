@@ -4,7 +4,11 @@ const rootDom = document.getElementById('root')
 
 function tick() {
   const time = new Date().toLocaleTimeString()
-  const clockElement = <h1>{time}</h1>
+  const clockElement = (
+    <div>
+      <h1>{time}</h1>
+    </div>
+  )
   SimplReact.render(clockElement, rootDom)
 }
 

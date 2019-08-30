@@ -7,7 +7,7 @@ export default class SimplReact {
   static render(element: element, parentDom: HTMLElement | Text) {
     const prevInstance = this.rootInstance
     if (prevInstance === null) {
-      console.log(instantiate(element))
+      console.log('instantiate Result', instantiate(element))
     }
 
     // const childElements = props.children || []
