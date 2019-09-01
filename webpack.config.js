@@ -1,7 +1,7 @@
-const Path = require('path');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Path = require('path')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -30,9 +30,7 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env'],
-            "plugins": [
-              ["transform-react-jsx", { "pragma":"createElement" }]
-            ]          
+            plugins: [['transform-react-jsx', { pragma: 'SimplReact.createElement' }]]
           }
         }
       },
@@ -44,7 +42,7 @@ module.exports = {
             name: '[path][name].[ext]'
           }
         }
-      },
+      }
     ]
   }
-};
+}

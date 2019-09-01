@@ -1,18 +1,16 @@
-import SimplReact from '../../dist/simplreact.es5';
+import SimplReact from '../../dist/simplreact.es5'
 
-const element = {
-  type: "div",
-  props: {
-    id: "container",
-    children: [
-      { type: "input", 
-        props: { 
-          onClick: (e) => console.log(e),
-          value: 'hi',
-        } 
-      },
-    ]
-  }
-};
+const rootDom = document.getElementById('root')
 
-SimplReact.render(element, document.getElementById("root"));
+function tick() {
+  const time = new Date().toLocaleTimeString()
+  const clockElement = (
+    <div>
+      <h1>{time}</h1>
+    </div>
+  )
+  SimplReact.render(clockElement, rootDom)
+}
+
+tick()
+setInterval(tick, 1000)
