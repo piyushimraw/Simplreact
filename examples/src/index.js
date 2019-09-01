@@ -13,4 +13,4 @@ function tick() {
 }
 
 tick()
-setInterval(tick, 1000000)
+setInterval(tick, 1000)
