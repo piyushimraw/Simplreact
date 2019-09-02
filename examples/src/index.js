@@ -6,7 +6,8 @@ function tick() {
   const time = new Date().toLocaleTimeString()
   const clockElement = (
     <div>
-      <h1>{time}</h1>
+      <h1>It shows time</h1>
+      <h1>Time is {time}</h1>
     </div>
   )
   SimplReact.render(clockElement, rootDom)
