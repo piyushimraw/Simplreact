@@ -6,7 +6,7 @@ export const isAttribute = (name: string) => !isListener(name) && name !== 'chil
 export const setAttributes = (dom: any, attribute: any, props: any) =>
   (dom[attribute] = props[attribute])
 
-export const updateAttribures = (
+export const updateAttributes = (
   dom: HTMLElement | Text | any,
   prevProps: Props,
   nextProps: Props
