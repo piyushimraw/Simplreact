@@ -21,6 +21,7 @@ export const Reconcile = (
      * `types` are same
      *
      */
+    instance.childInstances = reconcileChildren(instance, element)
     instance.element = element
     return instance
   } else {
@@ -28,4 +29,23 @@ export const Reconcile = (
     parentDom.replaceChild(newInstance.dom, instance.dom)
     return newInstance
   }
+}
+
+export const reconcileChildren = (instance: Instance, element: element): Array<Instance> => {
+  const { dom } = instance
+  const { childInstances } = instance
+  const nextChildrentElements = element.props.children || []
+
+  const newChildrenInstances = []
+
+  const count = Math.max(childInstances.length, nextChildrentElements.length)
+
+  for (let i = 0; i < count; i++) {
+    const childInstance = childInstances[i]
+    const childElement = nextChildrentElements[i]
+    const newChildren = Reconcile(dom, childInstance, childElement)
+    newChildrenInstances.push(newChildren)
+  }
+
+  return newChildrenInstances.filter(childInstance => childInstance !== null)
 }
