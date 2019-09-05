@@ -7,7 +7,6 @@ export const Reconcile = (
   instance: Instance | null,
   element: element
 ) => {
-  debugger
   if (instance === null) {
     const newInstance = instantiate(element)
     parentDom.appendChild(newInstance.dom)
@@ -15,12 +14,6 @@ export const Reconcile = (
   } else if (instance.element.type === element.type) {
     // Update DOM Properties
     updateAttributes(instance.dom, instance.element.props, element.props)
-
-    /**
-     *  TODO: Implement ChildReconciler which reconcile children of a given element if
-     * `types` are same
-     *
-     */
     instance.childInstances = reconcileChildren(instance, element)
     instance.element = element
     return instance
@@ -32,6 +25,7 @@ export const Reconcile = (
 }
 
 export const reconcileChildren = (instance: Instance, element: element): Array<Instance> => {
+  console.log(instance, element)
   const { dom } = instance
   const { childInstances } = instance
   const nextChildrentElements = element.props.children || []
