@@ -2,6 +2,7 @@ import props from './props'
 
 interface element {
   type: string
+  key: string
   props: props
 }
 

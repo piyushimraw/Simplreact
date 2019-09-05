@@ -1,6 +1,7 @@
 import element, { Instance } from '../types/element'
 import { instantiate } from '../lib/Instantiate'
 import { updateAttributes } from '../utils/DomUtils'
+import AppUtils from '../utils/AppUtils'
 
 export const Reconcile = (
   parentDom: HTMLElement | Text,
@@ -14,6 +15,13 @@ export const Reconcile = (
   } else if (instance.element.type === element.type) {
     // Update DOM Properties
     updateAttributes(instance.dom, instance.element.props, element.props)
+    if (
+      !AppUtils.isNullorUndefined(instance.element.key) &&
+      !AppUtils.isNullorUndefined(element) &&
+      instance.element.key === element.key
+    ) {
+      return instance
+    }
     instance.childInstances = reconcileChildren(instance, element)
     instance.element = element
     return instance
@@ -25,7 +33,6 @@ export const Reconcile = (
 }
 
 export const reconcileChildren = (instance: Instance, element: element): Array<Instance> => {
-  console.log(instance, element)
   const { dom } = instance
   const { childInstances } = instance
   const nextChildrentElements = element.props.children || []
