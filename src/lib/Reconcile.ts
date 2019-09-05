@@ -7,21 +7,17 @@ export const Reconcile = (
   parentDom: HTMLElement | Text,
   instance: Instance | null,
   element: element
-) => {
+): Instance | null => {
   if (instance === null) {
     const newInstance = instantiate(element)
     parentDom.appendChild(newInstance.dom)
     return newInstance
+  } else if (AppUtils.isNullorUndefined(element)) {
+    parentDom.removeChild(instance.dom)
+    return null
   } else if (instance.element.type === element.type) {
     // Update DOM Properties
     updateAttributes(instance.dom, instance.element.props, element.props)
-    if (
-      !AppUtils.isNullorUndefined(instance.element.key) &&
-      !AppUtils.isNullorUndefined(element) &&
-      instance.element.key === element.key
-    ) {
-      return instance
-    }
     instance.childInstances = reconcileChildren(instance, element)
     instance.element = element
     return instance
@@ -32,7 +28,7 @@ export const Reconcile = (
   }
 }
 
-export const reconcileChildren = (instance: Instance, element: element): Array<Instance> => {
+export const reconcileChildren = (instance: Instance, element: element): Array<Instance | null> => {
   const { dom } = instance
   const { childInstances } = instance
   const nextChildrentElements = element.props.children || []
@@ -48,5 +44,5 @@ export const reconcileChildren = (instance: Instance, element: element): Array<I
     newChildrenInstances.push(newChildren)
   }
 
-  return newChildrenInstances.filter(childInstance => childInstance !== null)
+  return newChildrenInstances.filter((childInstance: Instance | null) => childInstance !== null)
 }

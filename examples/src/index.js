@@ -2,14 +2,9 @@ import SimplReact from '../../dist/simplreact.es5'
 
 const rootDom = document.getElementById('root')
 
-function tick() {
+function tick(elements = [1, 2]) {
   const time = new Date().toLocaleTimeString()
-  const clockElement = (
-    <div>
-      <h1>It shows time</h1>
-      <h1>Time is {time}</h1>
-    </div>
-  )
+  const clockElement = <div>{elements.map(item => item)}</div>
   SimplReact.render(clockElement, rootDom)
 }
 

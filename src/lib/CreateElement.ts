@@ -9,7 +9,7 @@ export const createElement = (type: any, config: any, ...args: any[]) => {
   props.children = rawChildren
     .filter(children => children !== null && children !== false)
     .map((children: any) => (children instanceof Object ? children : createTextElement(children)))
-  return { type, props }
+  return { type, props, key: props.key && props.key.toString() }
 }
 
 export const createTextElement = (children: string) => {

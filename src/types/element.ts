@@ -9,7 +9,7 @@ interface element {
 export interface Instance {
   dom: HTMLElement | Text
   element: element
-  childInstances: Array<Instance>
+  childInstances: Array<Instance | null>
 }
 
 export default element
